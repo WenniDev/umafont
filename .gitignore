@@ -1,0 +1,7 @@
+node_modules/
+dist/
+dist_font/
+build/
+ref/
+*.local
+CLAUDE.md

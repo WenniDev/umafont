@@ -1,0 +1,115 @@
+@font-face {
+  font-family: 'UmamusumeDisplay';
+  src: url('./assets/UmamusumeDisplay-Regular.ttf') format('truetype');
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'UmamusumeSubtitle';
+  src: url('./assets/UmamusumeSubtitle-Regular.ttf') format('truetype');
+  font-display: block;
+}
+
+:root {
+  --bg: #fdf7fa;
+  --panel: #ffffff;
+  --line: #e8dbe4;
+  --ink: #3a2f36;
+  --muted: #8a7a84;
+  --accent: #f15086;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font: 14px/1.5 system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+}
+
+
+main { display: grid; grid-template-columns: 320px 1fr; gap: 0; align-items: start; }
+@media (max-width: 820px) {
+  main { grid-template-columns: 1fr; }
+  /* Single column: the result sits above the settings, so pinning it would
+     cover them. */
+  #stage { position: static; min-height: 0; justify-content: flex-start; }
+}
+
+#panel {
+  padding: 18px 20px 40px;
+  border-right: 1px solid var(--line);
+  background: var(--panel);
+  min-height: 100vh;
+}
+#panel fieldset { border: 0; padding: 0; margin: 0 0 22px; }
+/* The name lives at the head of the settings column now that the page has no
+   banner. The width/height attributes on the tag give it an intrinsic ratio, so
+   the row keeps its height before the image has loaded. */
+.brand {
+  display: block; width: 100%; height: auto;
+  margin: 0 0 18px; padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+#panel legend {
+  padding: 0; margin-bottom: 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .09em; color: var(--muted);
+}
+.row { display: flex; align-items: center; gap: 10px; margin-bottom: 9px; }
+.row label { flex: 0 0 96px; font-size: 12px; color: var(--muted); }
+.row input[type="text"], .row input[type="number"] {
+  flex: 1; min-width: 0; padding: 6px 8px;
+  border: 1px solid var(--line); border-radius: 6px; font: inherit; font-size: 13px;
+}
+.row input[type="range"] { flex: 1; min-width: 0; }
+.row output { flex: 0 0 46px; text-align: right; font-variant-numeric: tabular-nums;
+  color: var(--muted); font-size: 12px; }
+.row input[type="color"] {
+  width: 34px; height: 26px; padding: 0; border: 1px solid var(--line);
+  border-radius: 5px; background: none; cursor: pointer;
+}
+.subhead { margin: 12px 0 6px; font-size: 12px; font-weight: 600; color: var(--ink); }
+.subhead:first-child { margin-top: 0; }
+.check { display: flex; align-items: center; gap: 7px; margin-bottom: 7px; font-size: 13px; }
+
+#stage {
+  /* A grid item defaults to min-width: auto, so the 1fr column would widen to
+     fit a long logo instead of letting it scroll -- the whole page ended up
+     scrolling sideways. min-width: 0 lets the track shrink, so #canvasWrap's
+     max-width and overflow-x take effect. */
+  min-width: 0;
+  padding: 32px;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 18px;
+  /* The settings column is much taller than this one, so the result would
+     scroll out of sight while the reader works through the panel. Pinning it to
+     a viewport-tall sticky box, with its content centred, keeps it in view the
+     whole way down. `overflow-y` covers the case where the preview itself grows
+     taller than the screen. */
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  justify-content: center;
+  overflow-y: auto;
+}
+#canvasWrap {
+  padding: 16px; border-radius: 10px; border: 1px solid var(--line);
+  background-color: #fff;
+  background-image:
+    linear-gradient(45deg, #f0e8ee 25%, transparent 25%, transparent 75%, #f0e8ee 75%),
+    linear-gradient(45deg, #f0e8ee 25%, transparent 25%, transparent 75%, #f0e8ee 75%);
+  background-size: 18px 18px;
+  background-position: 0 0, 9px 9px;
+  max-width: 100%; overflow-x: auto;
+}
+canvas { display: block; max-width: 100%; height: auto; }
+
+.actions { display: flex; gap: 10px; flex-wrap: wrap; }
+button {
+  padding: 9px 16px; border: 1px solid var(--line); border-radius: 7px;
+  background: var(--panel); color: var(--ink); font: inherit; font-size: 13px; cursor: pointer;
+}
+button.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+button:hover { filter: brightness(0.97); }
+

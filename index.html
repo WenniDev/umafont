@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8F%87%3C/text%3E%3C/svg%3E" />
+  <title>Umamusume Logo Generator</title>
+</head>
+<body>
+  <main>
+    <section id="panel">
+      <img class="brand" src="./src/assets/logo.png" alt="Umamusume Logo Generator" width="1581" height="574" />
+
+      <fieldset>
+        <legend>Text</legend>
+        <div class="row"><label for="main1">Part 1</label><input type="text" id="main1" value="Uma" /></div>
+        <div class="row"><label for="main2">Part 2</label><input type="text" id="main2" value="musume" /></div>
+        <div class="row"><label for="sub">Subtitle</label><input type="text" id="sub" value="PRETTY DERBY" /></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Colours</legend>
+        <div class="row"><label>Part 1</label><input type="color" id="m1Top" value="#F7EA52" /><input type="color" id="m1Bottom" value="#E77B33" /></div>
+        <div class="row"><label>Part 2</label><input type="color" id="m2Top" value="#F6D7C6" /><input type="color" id="m2Bottom" value="#DF5985" /></div>
+        <div class="row"><label>Subtitle</label><input type="color" id="subTop" value="#FFFFFF" /><input type="color" id="subBottom" value="#F6E5F2" /></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Borders</legend>
+        <div id="borderControls"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Background</legend>
+        <label class="check"><input type="checkbox" id="transparent" /> Transparent background</label>
+        <div class="row"><label for="bgColor">Colour</label><input type="color" id="bgColor" value="#FFFFFF" /></div>
+      </fieldset>
+    </section>
+
+    <section id="stage">
+      <div id="canvasWrap"><canvas id="canvas"></canvas></div>
+      <div class="actions">
+        <button class="primary" id="download">Download PNG</button>
+        <button id="copy">Copy</button>
+        <button id="reset">Reset colours</button>
+      </div>
+      <p id="status" style="color:var(--muted);font-size:12px;margin:0"></p>
+    </section>
+  </main>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
